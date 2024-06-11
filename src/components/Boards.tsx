@@ -69,7 +69,7 @@ const Boards = () => {
 
   function createTask(columnId: Id) {
     const newTask: Task = {
-      id: tasks.length,
+      id: generateId(),
       columnId,
       content: `Task ${tasks.length + 1}`,
       color: "blue",
@@ -230,21 +230,22 @@ const Boards = () => {
         const test = tasks[overIndex].columnId;
         if (tasks[activeIndex].columnId != tasks[overIndex].columnId) {
           tasks[activeIndex].columnId = tasks[overIndex].columnId;
+          const taskRef = ref(db, `tasks/${activeId}`);
+          update(taskRef, { columnId: test })
+            .then(() => {
+              console.log(
+                `Task ${activeId} columnId updated successfully in Firebase`
+              );
+            })
+            .catch((error) => {
+              console.error(
+                `Error updating task ${activeId} columnId in Firebase:`,
+                error
+              );
+            });
           return arrayMove(tasks, activeIndex, overIndex - 1);
         }
-        const taskRef = ref(db, `tasks/${activeId}`);
-        update(taskRef, { columnId: test })
-          .then(() => {
-            console.log(
-              `Task ${activeId} columnId updated successfully in Firebase`
-            );
-          })
-          .catch((error) => {
-            console.error(
-              `Error updating task ${activeId} columnId in Firebase:`,
-              error
-            );
-          });
+
         return arrayMove(tasks, activeIndex, overIndex);
       });
     }
