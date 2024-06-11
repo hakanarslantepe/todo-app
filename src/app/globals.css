@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  background-color: black;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4299e1;
+  border-radius: 6px;
+}
+
+.task > ::-webkit-scrollbar-thumb {
+  background-color: #4299e1;
+  border-radius: 6px;
+}
+.white-icon {
+  filter: invert(100%) brightness(200%);
+}
+
+.test{
+  width: 312px!important;
+}
