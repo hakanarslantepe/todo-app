@@ -89,7 +89,7 @@ function Board({
       bg-slate-900
   w-[350px]
   h-[700px]
-  rounded-md
+  rounded-lg
   flex
   flex-col
   border-2

@@ -25,7 +25,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
   const [editMode, setEditMode] = useState(false);
   const [editedContent, setEditedContent] = useState(task.content);
   const [editedDescription, setEditedDescription] = useState(task.description);
-  const [color, setColor] = useState("blue");
+  const [color, setColor] = useState(task.color || "blue");
 
   const {
     setNodeRef,
@@ -58,6 +58,12 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
     toggleEditMode();
   };
 
+  const getColorButtonClass = (buttonColor: string) => {
+    return `h-5 w-5 rounded-full ${
+      buttonColor === color ? "border-2 border-white" : ""
+    }`;
+  };
+
   if (isDragging) {
     return (
       <div
@@ -78,7 +84,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
         style={style}
         {...attributes}
         {...listeners}
-        className="bg-slate-700 text-white p-2.5 h-[120px] min-h-[120px] items-center flex text-left rounded-lg hover:ring-2 hover:ring-inset hover:ring-red-500 cursor-grab relative"
+        className={`bg-${color}-500 text-white p-2.5 h-[120px] min-h-[120px] items-center flex text-left rounded-lg hover:ring-2 hover:ring-inset hover:ring-red-500 cursor-grab relative`}
       >
         <div className="flex flex-col">
           <input
@@ -97,19 +103,19 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
           <div className="flex flex-row gap-x-5">
             <button
               onClick={() => setColor("pink")}
-              className="h-5 w-5 bg-pink-500 rounded-full items-center justify-center"
+              className={`bg-pink-500 ${getColorButtonClass("pink")}`}
             ></button>
             <button
               onClick={() => setColor("yellow")}
-              className="h-5 w-5 bg-yellow-500 rounded-full"
+              className={`bg-yellow-500 ${getColorButtonClass("yellow")}`}
             ></button>
             <button
               onClick={() => setColor("blue")}
-              className="h-5 w-5 bg-blue-500 rounded-full"
+              className={`bg-blue-500 ${getColorButtonClass("blue")}`}
             ></button>
             <button
               onClick={() => setColor("purple")}
-              className="h-5 w-5 bg-purple-500 rounded-full"
+              className={`bg-purple-500 ${getColorButtonClass("purple")}`}
             ></button>
           </div>
         </div>

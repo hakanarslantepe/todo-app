@@ -69,7 +69,7 @@ const Boards = () => {
 
   function createTask(columnId: Id) {
     const newTask: Task = {
-      id: generateId(),
+      id: tasks.length,
       columnId,
       content: `Task ${tasks.length + 1}`,
       color: "blue",
@@ -227,12 +227,24 @@ const Boards = () => {
       setTasks((tasks) => {
         const activeIndex = tasks.findIndex((t) => t.id === activeId);
         const overIndex = tasks.findIndex((t) => t.id === overId);
-
+        const test = tasks[overIndex].columnId;
         if (tasks[activeIndex].columnId != tasks[overIndex].columnId) {
           tasks[activeIndex].columnId = tasks[overIndex].columnId;
           return arrayMove(tasks, activeIndex, overIndex - 1);
         }
-
+        const taskRef = ref(db, `tasks/${activeId}`);
+        update(taskRef, { columnId: test })
+          .then(() => {
+            console.log(
+              `Task ${activeId} columnId updated successfully in Firebase`
+            );
+          })
+          .catch((error) => {
+            console.error(
+              `Error updating task ${activeId} columnId in Firebase:`,
+              error
+            );
+          });
         return arrayMove(tasks, activeIndex, overIndex);
       });
     }
@@ -361,7 +373,7 @@ const Boards = () => {
 };
 
 export function generateId() {
-  return Math.floor(Math.random() * 10001);
+  return Date.now().toString();
 }
 
 export default Boards;
