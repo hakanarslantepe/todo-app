@@ -2,13 +2,13 @@
 This project contains a task management application developed using Next.js. This application allows users to create, edit, delete, and track their tasks using drag and drop functionality.
 
 # Live Demo
-You can view the live demo of the project [here](https://task-management-weld-seven.vercel.app/)
+You can view the live demo of the project [here](https://todo-app-coral-delta.vercel.app/)
 
 # Getting Started
 To run the project on your local machine, follow these steps:
 
 1-Clone the repository:
-git clone https://github.com/hakanarslantepe/task-management
+git clone https://github.com/hakanarslantepe/todo-app
 
 2-Navigate to the project directory:
 cd task-management
